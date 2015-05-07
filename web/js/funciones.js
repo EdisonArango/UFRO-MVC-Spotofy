@@ -9,8 +9,22 @@ $(document).ready(function() {
         $(".mensaje").fadeOut(1500);
     },2000);
     
+    
+        $('#busqueda').keyup(function() {
+            var $rows = $('.tablacancion');
+            var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+            
+            $rows.show().filter(function() {
+                var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+                return !~text.indexOf(val);
+            }).hide();
+    });
+
     $("#contenido").load("CancionesServlet?type=pagina");
+    
 });
+
+
 
 function agregarPlayList (){
     var insert = "<form class='form-inline' method='post' action='PlayListServlet' >\n\

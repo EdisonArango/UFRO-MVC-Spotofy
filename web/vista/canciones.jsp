@@ -9,7 +9,7 @@
 <%@page import="modelo.Cancion" language="java"%>
 <%@page import="modelo.PlayList" language="java"%>
 <!DOCTYPE html>
-                <table class="table table-striped">
+                <table  id="tabla" class="table table-striped">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -32,7 +32,7 @@
                     String artista = canciones.get(i).getArtista();
                     String genero = canciones.get(i).getGenero();
                     String url = "'/CancionServlet?id="+id+"'";
-                    out.print("<tr>");
+                    out.print("<tr class='tablacancion'>");
                     out.print("<th scope='row'>"+(i+1)+"</th>");
                     out.print("<td>"+nombre+"</td>");
                     out.print("<td>"+artista+"</td>");
@@ -64,3 +64,4 @@
          %>
       </tbody>
     </table>
+      

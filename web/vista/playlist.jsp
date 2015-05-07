@@ -16,9 +16,9 @@
             <button style="display: inline-block;" class="btn btn-default"><i class="glyphicon glyphicon-play"></i>Reproducir</button>
             <button onclick="location.href = 'PlayListServlet?type=deletePlaylist&idPlaylist=<%= playlist.getId() %>';" style="display: inline-block;" class="btn btn-dark"><i class="glyphicon glyphicon-remove"></i>Eliminar</button>
         </div>
-                <table class="table table-striped">
+                <table id="tabla" class="table table-striped">
                 <thead>
-                  <tr>
+                  <tr >
                     <th>#</th>
                     <th>Nombre</th>
                     <th>Artista</th>
@@ -37,7 +37,7 @@
                     String artista = canciones.get(i).getArtista();
                     String genero = canciones.get(i).getGenero();
                     String url = "'/CancionServlet?id="+id+"'";
-                    out.print("<tr>");
+                    out.print("<tr class='tablacancion'>");
                     out.print("<th scope='row'>"+(i+1)+"</th>");
                     out.print("<td>"+nombre+"</td>");
                     out.print("<td>"+artista+"</td>");

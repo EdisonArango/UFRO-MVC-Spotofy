@@ -38,7 +38,7 @@
                     <div class="form-group" style="display:inline;">
                       <div class="input-group" style="display:table;">
                         <span class="input-group-addon" style="width:1%;"><span class="glyphicon glyphicon-search"></span></span>
-                        <input class="form-control" name="busqueda" placeholder="Buscar canción" type="text">
+                        <input class="form-control" id="busqueda" name="busqueda" placeholder="Buscar canción" type="text">
                         <!--<button class="input-group-addon glyphicon glyphicon-search" type="submit"></button>-->
                       </div>
                     </div>
@@ -88,10 +88,9 @@
                             
                         </ul>
                     </div>
-                    
-                
+               
             </div>
-            <div id="contenido" class="scrollable2">  
+            <div id="contenido" class="scrollable2">
              </div>
      
         </div>   
