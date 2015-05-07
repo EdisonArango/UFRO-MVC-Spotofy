@@ -18,13 +18,6 @@ public class Cancion {
         this.genero = genero;
     }
         
-        
-
-	public void obtenerCancion() {
-            
-//            Conexion 
-            
-	}
 
     public String getNombre() {
         return nombre;

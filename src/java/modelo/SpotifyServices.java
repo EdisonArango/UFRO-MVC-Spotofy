@@ -1,6 +1,5 @@
 package modelo;
 
-import control.Principal;
 import java.util.ArrayList;
 
 public class SpotifyServices {
@@ -12,8 +11,8 @@ public class SpotifyServices {
             playLists = new ArrayList<>();
             canciones = new ArrayList<>();
             
-            for (int i = 0; i < datosCanciones.length; i++) {
-                canciones.add(new Cancion(datosCanciones[i][0],datosCanciones[i][1],datosCanciones[i][2]));
+            for (String[] datosCancione : datosCanciones) {
+                canciones.add(new Cancion(datosCancione[0], datosCancione[1], datosCancione[2]));
             }
             playLists.add(new PlayList("Favoritos"));
         }

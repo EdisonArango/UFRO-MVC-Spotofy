@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.ArrayList;
-import modelo.Cancion;
 
 public class PlayList {
     
@@ -18,33 +17,10 @@ public class PlayList {
     }
         
 
-	public void agregarCancion(Cancion cancion) {
-            canciones.add(cancion);
-	}
-
-    public String getNombre() {
-        return nombre;
+    public void agregarCancion(Cancion cancion) {
+        canciones.add(cancion);
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public static int getActual() {
-        return actual;
-    }
-
-    public static void setActual(int actual) {
-        PlayList.actual = actual;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public ArrayList<Cancion> getCanciones() {
         return canciones;
@@ -72,6 +48,21 @@ public class PlayList {
         this.canciones = canciones;
     }
 
-        
+      public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
 }
