@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Cancion;
+import modelo.PlayList;
 
 /**
  *
@@ -33,6 +35,8 @@ public class PlayListServlet extends HttpServlet {
             throws ServletException, IOException {
         
         String tipo = request.getParameter("type");
+        int idPlaylist;
+        String mensaje;
         switch (tipo) {
             case "nuevo":
                 String nombre = request.getParameter("nombre");
@@ -42,9 +46,24 @@ public class PlayListServlet extends HttpServlet {
                 request.getRequestDispatcher("Principal").forward(request, response);
                 break;
             case "pagina":
-                int idPlaylist = Integer.valueOf(request.getParameter("idPlaylist"));
+                idPlaylist = Integer.valueOf(request.getParameter("idPlaylist"));
                 request.setAttribute("playlist", Principal.spotify.obtenerPlayList(idPlaylist));
-                request.getRequestDispatcher("vista/canciones.jsp").forward(request, response);
+                request.getRequestDispatcher("vista/playlist.jsp").forward(request, response);
+                break;
+            case "delete":
+                idPlaylist = Integer.valueOf(request.getParameter("idPlaylist"));
+                int idCancion = Integer.valueOf(request.getParameter("idCancion"));
+                mensaje = Principal.spotify.eliminarCancionDePlayList(idCancion, idPlaylist);
+                request.setAttribute("type", "mensajeWar");
+                request.setAttribute("mensajeWar", mensaje);
+                request.getRequestDispatcher("Principal").forward(request, response);
+                break;
+            case "deletePlaylist":
+                idPlaylist = Integer.valueOf(request.getParameter("idPlaylist"));
+                mensaje = Principal.spotify.eliminarPlayList(idPlaylist);
+                request.setAttribute("type", "mensajeWar");
+                request.setAttribute("mensajeWar", mensaje);
+                request.getRequestDispatcher("Principal").forward(request, response);
                 break;
         }
     }

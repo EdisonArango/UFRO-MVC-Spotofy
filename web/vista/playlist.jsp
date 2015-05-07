@@ -9,6 +9,13 @@
 <%@page import="modelo.Cancion" language="java"%>
 <%@page import="modelo.PlayList" language="java"%>
 <!DOCTYPE html>
+    <% PlayList playlist = (PlayList)request.getAttribute("playlist"); %>
+        <div class="featurette">
+            <span style="font-size: 7em;float: left;padding: 40px;" class="glyphicon glyphicon-music"></span>
+            <h2 style="padding-top: 45px" class="featurette-heading"><% out.print(playlist.getNombre()); %>  <span style="font-size: 0.5em;" class="text-muted">PLAYLIST</span></h2>
+            <button style="display: inline-block;" class="btn btn-default"><i class="glyphicon glyphicon-play"></i>Reproducir</button>
+            <button onclick="location.href = 'PlayListServlet?type=deletePlaylist&idPlaylist=<%= playlist.getId() %>';" style="display: inline-block;" class="btn btn-dark"><i class="glyphicon glyphicon-remove"></i>Eliminar</button>
+        </div>
                 <table class="table table-striped">
                 <thead>
                   <tr>
@@ -21,7 +28,6 @@
                 </thead>
                 <tbody>
          <%
-                PlayList playlist = (PlayList)request.getAttribute("playlist");
                 ArrayList<Cancion> canciones = playlist.getCanciones();
                 String listaDropDown = "";
                 for  (int i=0; i<canciones.size();i++){
@@ -36,6 +42,14 @@
                     out.print("<td>"+nombre+"</td>");
                     out.print("<td>"+artista+"</td>");
                     out.print("<td>"+genero+"</td>");
+                    %>
+                <td>
+                    <button onclick="location.href = 'PlayListServlet?type=delete&idPlaylist=<%= playlist.getId() %>&idCancion=<%= id %>';" style="display: inline-block;padding-top: 2px;padding-bottom: 2px;" class="btn btn-default">
+                         <i class="glyphicon glyphicon-remove"></i>
+                         Eliminar
+                     </button>
+                </td>
+                    <%
                     out.print("<td></td>");
                     out.print("</tr>");
                 }

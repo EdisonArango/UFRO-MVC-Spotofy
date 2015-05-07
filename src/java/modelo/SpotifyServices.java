@@ -1,5 +1,6 @@
 package modelo;
 
+import control.Principal;
 import java.util.ArrayList;
 
 public class SpotifyServices {
@@ -53,16 +54,26 @@ public class SpotifyServices {
             playLists.add(new PlayList(nombre));
 	}
 
-	public void eliminarPlayList(int idPLayList) {
-		throw new UnsupportedOperationException();
+	public String eliminarPlayList(int idPLayList) {
+            String nombre = "";
+            for (int i = 0; i < playLists.size(); i++) {
+                if (playLists.get(i).getId()==idPLayList) {
+                    nombre = playLists.get(i).getNombre();
+                    playLists.remove(i);
+                }
+            }
+            return "La Playlist '"+nombre+"' se ha eliminado";
 	}
 
 	public void buscarCanciones(String consulta) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void eliminarCancionDePlayList(int idCancion) {
-		throw new UnsupportedOperationException();
+	public String eliminarCancionDePlayList(int idCancion,int idPlaylist) {
+                PlayList playlist = obtenerPlayList(idPlaylist);
+		Cancion cancion = obtenerCancion(idCancion);
+                playlist.eliminarCancion(cancion);
+                return "La Cancion '"+cancion.getNombre()+"' se ha eliminado de la playlist '"+playlist.getNombre()+"'";
 	}
 
 	public void reproducirCancion(int idCancion) {

@@ -42,6 +42,10 @@ public class Principal extends HttpServlet {
                 String mensaje = (String)request.getAttribute("mensaje");
                 request.setAttribute("mensaje", mensaje);
             }
+            else if (tipo!=null&&tipo.equals("mensajeWar")) {
+                String mensaje = (String)request.getAttribute("mensajeWar");
+                request.setAttribute("mensajeWar", mensaje);
+            }
             request.setAttribute("canciones", spotify.getCanciones());
             request.setAttribute("playlists", spotify.getPlayList());
             

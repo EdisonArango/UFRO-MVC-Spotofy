@@ -81,3 +81,9 @@ footer {
     height: 60px;
     background-color: #DDD;
 }
+
+.btn-dark          
+{ color: #ffffff; background-color: #777; border-color: #555; }
+.btn-dark:hover, .btn-dark:focus, .btn-dark:active, .btn-dark.active, .open .dropdown-toggle.btn-dark
+                        
+{ color: #ffffff; background-color: #888; border-color: #444; }

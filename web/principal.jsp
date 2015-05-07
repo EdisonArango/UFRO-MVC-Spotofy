@@ -31,7 +31,7 @@
                 </button>
               </div>
               
-              <a class="col-md-3 navbar-brand" href="#">Spotofy</a>
+              <a class="col-md-3 navbar-brand" href="/Spotofy">Spotofy</a>
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form">
@@ -55,8 +55,23 @@
                       <strong>¡Bien!</strong> ${mensaje}
                 </div>
                  <% } %>
+          <% 
+                String mensajeWar = (String)request.getAttribute("mensajeWar");
+                if(mensajeWar!=null&&mensajeWar!=""){ %>
+                <div style="padding-left: 26%;" class="alert alert-warning alert-dismissable mensaje">
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                      <strong>¡Bien!</strong> ${mensajeWar}
+                </div>
+                 <% } %>
+                 
         <div class="content">
         <div class="left border_right sidebar1">
+            <ul class="nav">
+                 <li>
+                     <a style='color:black;' class='glyphicon glyphicon-music' href='/Spotofy' >&nbsp;<b>Todas las canciones</b></a>
+            </li>
+            </ul>
+           
             <h4 style="color: #555"><u>PLAYLISTS</u></h4>
                     <div>
                         <ul class="nav">

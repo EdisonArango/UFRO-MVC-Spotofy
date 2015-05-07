@@ -58,6 +58,15 @@ public class PlayList {
         }
         return false;
     }
+    
+    public void eliminarCancion (Cancion Cancion){
+        for (int i = 0; i < canciones.size(); i++) {
+            if (canciones.get(i)==Cancion) {
+                canciones.remove(i);
+                break;
+            }
+        }
+    }
 
     public void setCanciones(ArrayList<Cancion> canciones) {
         this.canciones = canciones;
