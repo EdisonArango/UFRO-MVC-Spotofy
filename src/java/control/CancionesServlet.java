@@ -6,6 +6,8 @@
 package control;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Cancion;
 import modelo.PlayList;
+import org.orm.PersistentException;
 
 /**
  *
@@ -31,22 +34,20 @@ public class CancionesServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, PersistentException {
         
         String tipo = request.getParameter("type");
         if (tipo.equals("addToPlayList")) {
             int idPlaylist = Integer.valueOf(request.getParameter("idPlaylist"));
             int idCancion = Integer.valueOf(request.getParameter("idCancion"));
-            PlayList playlist = Principal.spotify.obtenerPlayList(idPlaylist);
-            Cancion cancion = Principal.spotify.obtenerCancion(idCancion);
-            Principal.spotify.agregarCancionAPlaylist(cancion, playlist);
+            Principal.spotify.agregarCancionAPlaylist(idCancion, idPlaylist);
             request.setAttribute("type", "mensaje");
-            request.setAttribute("mensaje", "La Cancion '"+cancion.getNombre()+"' se ha agregado a la playlist '"+playlist.getNombre()+"'");
+            request.setAttribute("mensaje", "La Cancion se ha agregado a la playlist");
             request.getRequestDispatcher("Principal").forward(request, response);
         }
         else if (tipo.equals("pagina")) {
-            request.setAttribute("canciones", Principal.spotify.getCanciones());
-            request.setAttribute("playlists", Principal.spotify.getPlayList());
+            request.setAttribute("canciones", Principal.spotify.cargarCanciones());
+            request.setAttribute("playlists", Principal.spotify.cargarPlaylist());
             request.getRequestDispatcher("vista/canciones.jsp").forward(request, response);
         }
         
@@ -66,7 +67,11 @@ public class CancionesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (PersistentException ex) {
+            Logger.getLogger(CancionesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -80,7 +85,11 @@ public class CancionesServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (PersistentException ex) {
+            Logger.getLogger(CancionesServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -7,12 +7,15 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.SpotifyServices;
+import org.orm.PersistentException;
 
 /**
  *
@@ -21,7 +24,11 @@ import modelo.SpotifyServices;
 @WebServlet(name = "Principal", urlPatterns = {"/Principal"})
 public class Principal extends HttpServlet {
     
-    static SpotifyServices spotify = new SpotifyServices();
+    static SpotifyServices spotify;
+    
+    public Principal() throws PersistentException{
+        spotify = new SpotifyServices();
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +40,7 @@ public class Principal extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, PersistentException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
@@ -46,8 +53,8 @@ public class Principal extends HttpServlet {
                 String mensaje = (String)request.getAttribute("mensajeWar");
                 request.setAttribute("mensajeWar", mensaje);
             }
-            request.setAttribute("canciones", spotify.getCanciones());
-            request.setAttribute("playlists", spotify.getPlayList());
+            request.setAttribute("canciones", spotify.cargarCanciones());
+            request.setAttribute("playlists", spotify.cargarPlaylist());
             
             request.getRequestDispatcher("principal.jsp").forward(request, response);
         }
@@ -65,7 +72,11 @@ public class Principal extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (PersistentException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -79,7 +90,11 @@ public class Principal extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (PersistentException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -6,11 +6,14 @@
 package control;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.orm.PersistentException;
 
 /**
  *
@@ -29,7 +32,7 @@ public class PlayListServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, PersistentException {
         
         String tipo = request.getParameter("type");
         int idPlaylist;
@@ -77,7 +80,12 @@ public class PlayListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (PersistentException ex) {
+            System.out.println("Maldito Error puta vida");
+        }
+        
     }
 
     /**
@@ -91,7 +99,11 @@ public class PlayListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (PersistentException ex) {
+            Logger.getLogger(PlayListServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

@@ -4,14 +4,12 @@ import java.util.ArrayList;
 
 public class PlayList {
     
-        private static int actual=1;
         private int id;
 	private String nombre;
 	private ArrayList<Cancion> canciones;
 
-    public PlayList(String nombre) {
-        id=actual;
-        actual++;
+    public PlayList(int id,String nombre) {
+        this.id = id;
         this.nombre = nombre;
         canciones = new ArrayList<>();
     }

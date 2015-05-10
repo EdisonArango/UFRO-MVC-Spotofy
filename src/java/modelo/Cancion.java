@@ -3,16 +3,14 @@ package modelo;
 
 public class Cancion {
         
-        private static int actual=1;
         private int id;
 	private String nombre;
 	private String artista;
 	private String genero;
 	private String rutaArchivo;
 
-    public Cancion(String nombre, String artista, String genero) {
-        id=actual;
-        actual++;
+    public Cancion(int id,String nombre, String artista, String genero) {
+        this.id=id;
         this.nombre = nombre;
         this.artista = artista;
         this.genero = genero;
